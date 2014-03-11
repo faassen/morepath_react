@@ -39,8 +39,7 @@
 
     var DocumentCollection = Nanobviel.view({
         iface: 'DocumentCollection',
-        // initialize the state from the props, perhaps a micro
-        // obviel pattern
+        // initialize the state from the props, perhaps a nanobviel pattern
         getInitialState: function() {
             return this.props;
         },
@@ -56,6 +55,20 @@
                 this.setState(data);
             }.bind(this));
         },
+        handlePrevious: function() {
+            this.reload(this.state.previous);
+        },
+        handleNext: function() {
+            this.reload(this.state.next);
+        },
+        reload: function(url) {
+            if (url === null) {
+                return;
+            }
+            $.getJSON(url).done(function(data) {
+                this.setState(data);
+            }.bind(this));
+        },
         render: function() {
             var items = this.state.documents.map(function(document) {
                 return <Render key={document.id} obj={document} />
@@ -66,6 +79,10 @@
                       {items}
                     </ul>
                     <DocumentAdd handleSubmit={this.handleSubmit} />
+                    <br />
+                    {this.state.previous ? <a onClick={this.handlePrevious}>Previous</a> : false }
+                    |
+                    {this.state.next ? <a onClick={this.handleNext}>Next</a> : false}
                  </div>
             );
         }

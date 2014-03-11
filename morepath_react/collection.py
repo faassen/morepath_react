@@ -1,7 +1,7 @@
 from .model import Document
 from .main import Session
 
-MAX_LIMIT = 20
+MAX_LIMIT = 5
 
 class DocumentCollection(object):
     def __init__(self, offset=0, limit=MAX_LIMIT):
