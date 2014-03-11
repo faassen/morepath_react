@@ -19,6 +19,13 @@ def root_default(self, request):
 </html>'''
 
 
+@app.json(model=Root, name='info')
+def info(self, request):
+    return {
+        'document_collection': request.link(DocumentCollection())
+    }
+
+
 @app.json(model=Document)
 def document_default(self, request):
     return {'id': self.id,
