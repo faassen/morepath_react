@@ -8,7 +8,6 @@ import waitress
 
 from .model import Base
 
-
 Session = scoped_session(sessionmaker())
 register(Session)
 

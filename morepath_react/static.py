@@ -4,5 +4,8 @@ static = Library('static', 'static')
 
 react = Resource(static, 'react.js')
 
-main = Resource(static, 'main.js', depends=[react])
+jsx_transformer = Resource(static, 'jsx-transformer.js')
+
+main = Resource(static, 'main.js', depends=[react, jsx_transformer])
+
 
