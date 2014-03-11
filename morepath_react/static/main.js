@@ -1,47 +1,9 @@
 /** @jsx React.DOM */
 "use strict";
 (function() {
+    var Render = Nanobviel.Render;
 
-    var registry = {};
-
-    var Render = React.createClass({
-        getInitialState: function() {
-            return {iface: null};
-        },
-        componentWillMount: function() {
-            if (this.props.url !== undefined) {
-                $.getJSON(this.props.url).done(function(data) {
-                    this.setState(data);
-                }.bind(this));
-            } else if (this.props.obj !== undefined) {
-                this.setState(this.props.obj);
-            }
-        },
-        render: function() {
-            var iface = this.state.iface;
-            var klass = registry[iface];
-            if (klass === undefined) {
-                return <div />;
-            }
-            return klass(this.state);
-        }
-    });
-
-
-    // may want to have a render variety where we specify the
-    // iface (or component to use?) directly with the result from the URL
-
-    var view = function(info) {
-        // can possibly get iface from callee, see:
-        // https://github.com/facebook/react/commit/f0fdabae7bbeadde9245d00893b194e0310c8d9b
-        // for how React does it
-        info.displayName = info.iface;
-        var klass = React.createClass(info);
-        registry[info.iface] = klass;
-        return klass;
-    };
-
-    var Document = view({
+    var Document = Nanobviel.view({
         iface: 'Document',
         render: function() {
            return <li>{this.props.title}</li>;
@@ -75,8 +37,10 @@
         }
     });
 
-    var DocumentCollection = view({
+    var DocumentCollection = Nanobviel.view({
         iface: 'DocumentCollection',
+        // initialize the state from the props, perhaps a micro
+        // obviel pattern
         getInitialState: function() {
             return this.props;
         },
@@ -107,7 +71,7 @@
         }
     });
 
-    var Info = view({
+    var Info = Nanobviel.view({
         iface: 'Info',
         render: function() {
             return <Render url={this.props.document_collection} />;
@@ -115,17 +79,8 @@
     });
 
     $(document).ready(function() {
-        React.renderComponent(Render({url:'info'}),
+        React.renderComponent(Nanobviel.Render({url:'info'}),
                               document.getElementById('main'));
-
-
-        // var promise = $.getJSON('info');
-        // promise.done(function(data) {
-        //     var document_collection = data.document_collection;
-        //     React.renderComponent(
-        //             <DocumentCollection url={document_collection} />,
-        //         document.getElementById('main'));
-        // });
     });
 
 }());

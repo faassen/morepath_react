@@ -7,9 +7,11 @@ react = Resource(static, 'react.js')
 
 jsx_transformer = Resource(static, 'jsx-transformer.js')
 
+nanobviel = Resource(static, 'nanobviel.js', depends=[react])
+
 def jsx_renderer(url):
     return '<script type="text/jsx" src="%s"></script>' % url
 
 main = Resource(static, 'main.js', depends=[react, jsx_transformer,
-                                            jquery],
+                                            nanobviel, jquery],
                 renderer=jsx_renderer)
