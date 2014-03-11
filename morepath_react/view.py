@@ -2,12 +2,20 @@ from morepath import redirect
 from .model import Document, Root
 from .main import app
 from .collection import DocumentCollection
-from .static import react
+from .static import main
 
 @app.html(model=Root)
 def root_default(self, request):
-    react.need()
-    return '<!DOCTYPE html><html><head></head><body></body></html>'
+    main.need()
+    return '''\
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Morepath React Demo</title>
+  </head>
+  <body>
+  </body>
+</html>'''
 
 
 @app.json(model=Document)

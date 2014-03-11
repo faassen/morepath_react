@@ -21,5 +21,5 @@ def main():
     Base.metadata.bind = engine
 
     morepath.autosetup()
-    fanstatic_app = Fanstatic(app)
+    fanstatic_app = Fanstatic(app, versioning=True)
     waitress.serve(fanstatic_app)
