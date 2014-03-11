@@ -1,12 +1,13 @@
+from morepath import redirect
 from .model import Document, Root
 from .main import app
 from .collection import DocumentCollection
-from morepath import redirect
+from .static import react
 
-
-@app.json(model=Root)
+@app.html(model=Root)
 def root_default(self, request):
-    return redirect('/documents')
+    react.need()
+    return '<!DOCTYPE html><html><head></head><body></body></html>'
 
 
 @app.json(model=Document)

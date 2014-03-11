@@ -13,6 +13,7 @@ setup(name='morepath_react',
       install_requires=[
         'setuptools',
         'morepath',
+        'waitress',
         'fanstatic',
         'transaction',
         'more.transaction',
@@ -20,6 +21,9 @@ setup(name='morepath_react',
         'sqlalchemy >= 0.9',
       ],
       entry_points= {
+        'fanstatic.libraries': [
+            'static = morepath_react.static:static',
+            ],
         'console_scripts': [
             'morepath_react = morepath_react.main:main',
             ]

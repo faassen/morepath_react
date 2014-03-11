@@ -4,7 +4,7 @@ from .main import Session
 MAX_LIMIT = 20
 
 class DocumentCollection(object):
-    def __init__(self, offset, limit):
+    def __init__(self, offset=0, limit=MAX_LIMIT):
         self.offset = offset
         self.limit = min(limit, MAX_LIMIT)
 
