@@ -19,6 +19,7 @@ setup(name='morepath_react',
         'more.transaction',
         'zope.sqlalchemy >= 0.7.4',
         'sqlalchemy >= 0.9',
+        'js.jquery',
       ],
       entry_points= {
         'fanstatic.libraries': [

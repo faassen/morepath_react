@@ -14,6 +14,7 @@ def root_default(self, request):
     <title>Morepath React Demo</title>
   </head>
   <body>
+    <div id="main"></div>
   </body>
 </html>'''
 
