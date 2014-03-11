@@ -22,6 +22,7 @@ def root_default(self, request):
 @app.json(model=Root, name='info')
 def info(self, request):
     return {
+        'iface': 'Info',
         'document_collection': request.link(DocumentCollection())
     }
 
@@ -37,6 +38,7 @@ def document_default(self, request):
 @app.json(model=DocumentCollection)
 def document_collection_default(self, request):
     return {
+        'iface': 'DocumentCollection',
         'documents': [request.view(doc) for doc in self.query()],
         'previous': request.link(self.previous(), default=None),
         'next': request.link(self.next(), default=None),
