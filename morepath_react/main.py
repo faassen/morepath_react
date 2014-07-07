@@ -11,7 +11,9 @@ from .model import Base
 Session = scoped_session(sessionmaker())
 register(Session)
 
-app = morepath.App(extends=[transaction_app])
+
+class app(transaction_app):
+    pass
 
 def main():
     engine = sqlalchemy.create_engine('sqlite:///morepath_react.db')
@@ -20,5 +22,5 @@ def main():
     Base.metadata.bind = engine
 
     morepath.autosetup()
-    fanstatic_app = Fanstatic(app, versioning=True)
+    fanstatic_app = Fanstatic(app(), versioning=True)
     waitress.serve(fanstatic_app)
