@@ -1,10 +1,10 @@
 from morepath import redirect
 from .model import Document, Root
-from .main import app
+from .main import App
 from .collection import DocumentCollection
 from .static import main
 
-@app.html(model=Root)
+@App.html(model=Root)
 def root_default(self, request):
     main.need()
     return '''\
@@ -19,7 +19,7 @@ def root_default(self, request):
 </html>'''
 
 
-@app.json(model=Root, name='info')
+@App.json(model=Root, name='info')
 def info(self, request):
     return {
         'iface': 'Info',
@@ -27,7 +27,7 @@ def info(self, request):
     }
 
 
-@app.json(model=Document)
+@App.json(model=Document)
 def document_default(self, request):
     return {
         'iface': 'Document',
@@ -38,7 +38,7 @@ def document_default(self, request):
     }
 
 
-@app.json(model=DocumentCollection)
+@App.json(model=DocumentCollection)
 def document_collection_default(self, request):
     return {
         'iface': 'DocumentCollection',
@@ -49,7 +49,7 @@ def document_collection_default(self, request):
         }
 
 
-@app.json(model=DocumentCollection, name='add', request_method='POST')
+@App.json(model=DocumentCollection, name='add', request_method='POST')
 def document_collection_add(self, request):
     title = request.json.get('title')
     content = request.json.get('content')
