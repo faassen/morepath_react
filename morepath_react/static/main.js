@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 (function() {
     var Render = Nanobviel.Render;

@@ -2,11 +2,16 @@ from morepath import redirect
 from .model import Document, Root
 from .main import App
 from .collection import DocumentCollection
-from .static import main
+
 
 @App.html(model=Root)
 def root_default(self, request):
-    main.need()
+    request.include('jquery')
+    request.include('react/react.js')
+    request.include('react/JSXTransformer.js')
+    request.include('static/nanobviel.js')
+    request.include('static/main.js',
+                    '<script type="text/jsx" src="{url}"></script>')
     return '''\
 <!DOCTYPE html>
 <html>

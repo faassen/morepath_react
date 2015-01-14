@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 setup(name='morepath_react',
-      version='0.1dev',
+      version='0.1.dev0',
       description="Morepath React Demo with SQLAlchemy backend",
       author="Martijn Faassen",
       author_email="faassen@startifact.com",
@@ -14,17 +14,13 @@ setup(name='morepath_react',
         'setuptools',
         'morepath',
         'waitress',
-        'fanstatic',
         'transaction',
         'more.transaction',
         'zope.sqlalchemy >= 0.7.4',
         'sqlalchemy >= 0.9',
-        'js.jquery',
+        'more.static',
       ],
       entry_points= {
-        'fanstatic.libraries': [
-            'static = morepath_react.static:static',
-            ],
         'console_scripts': [
             'morepath_react = morepath_react.main:main',
             ]
